@@ -3,45 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Path of 42 Hadiths</title>
-    <meta name="description" content="Проект с переводом и пояснениями к 42 хадисам имама ан-Навави. Аутентичные тексты для современного читателя.">
-<meta name="keywords" content="хадисы, 42 хадиса, имам ан-Навави, ислам, религия">
+    <title>Ильмкала — крепость знания</title>
+    <meta name="description" content="Ильмкала — платформа для изучения основ ислама: 42 хадиса имама ан-Навави, 99 имён Аллаха, время намазов.">
     <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oranienbaum&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/adhan@4.4.2/dist/adhan.umd.min.js"></script>
+    <style>
+        :root {
+            --bg: #efeae1;
+            --card: #fbf9f4;
+            --text: #22304a;
+            --text-soft: #6d7482;
+            --blue: #2b4470;
+            --silver: #8b9099;
+            --gold: #b89a5e;
+            --line: #ddd6c8;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: 'Oranienbaum', 'Times New Roman', serif;
+            background-color: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header { padding: 2.5rem 1rem 2rem; text-align: center; }
+        .arabic-line { font-size: 1.4rem; color: var(--gold); margin-bottom: 0.5rem; }
+        h1 {
+            margin: 0;
+            font-size: clamp(2.4rem, 7vw, 3.6rem);
+            letter-spacing: 0.35em;
+            text-indent: 0.35em;
+            color: var(--blue);
+            font-weight: 400;
+        }
+        .title-sub { color: var(--text-soft); font-size: 1.05rem; letter-spacing: 0.12em; margin-top: 0.4rem; }
+        .ornament { display: flex; align-items: center; gap: 12px; max-width: 280px; margin: 1.4rem auto 0; }
+        .ornament::before, .ornament::after { content: ''; flex: 1; height: 1px; background: var(--silver); }
+        .ornament span { width: 8px; height: 8px; background: var(--gold); transform: rotate(45deg); }
+        .tagline { text-align: center; color: var(--text-soft); max-width: 520px; margin: 1.2rem auto 0; font-size: 1.05rem; line-height: 1.5; }
+        .container { max-width: 1000px; width: 100%; margin: 0 auto; padding: 2rem 1rem 3rem; }
+        .quick-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 2.5rem; }
+        .stat-card {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-top: 3px solid var(--blue);
+            border-radius: 4px;
+            padding: 1.4rem;
+            text-align: center;
+        }
+        .stat-title { font-size: 0.95rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 0.9rem; }
+        .prayer-row { display: flex; justify-content: space-between; padding: 3px 6px; font-size: 1.02rem; }
+        .prayer-row.next { background: rgba(43, 68, 112, 0.08); border-radius: 3px; color: var(--blue); }
+        .date-gregorian { font-size: 1.35rem; }
+        .date-hijri { margin-top: 0.5rem; color: var(--gold); font-size: 1.05rem; }
+        .section-label { text-align: center; letter-spacing: 0.25em; text-transform: uppercase; font-size: 0.9rem; color: var(--text-soft); margin-bottom: 1.2rem; }
+        .sections-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.2rem; }
+        .section-tile {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            padding: 2.2rem 1.4rem;
+            text-decoration: none;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+        .section-tile:hover { transform: translateY(-4px); border-color: var(--silver); box-shadow: 0 10px 24px rgba(34, 48, 74, 0.12); }
+        .tile-mark { width: 10px; height: 10px; background: var(--blue); transform: rotate(45deg); margin-bottom: 1rem; }
+        .tile-title { font-size: 1.3rem; color: var(--blue); letter-spacing: 0.05em; }
+        .tile-desc { margin-top: 0.4rem; font-size: 0.95rem; color: var(--text-soft); }
+        .tile-soon { opacity: 0.45; }
+        footer { margin-top: auto; text-align: center; padding: 1.4rem; color: var(--text-soft); font-size: 0.85rem; border-top: 1px solid var(--line); }
+        @media (max-width: 620px) { .quick-stats { grid-template-columns: 1fr; } }
+    </style>
 </head>
 <body>
 
-    <div class="arabic-banner">بسم الله الرحمن الرحيم</div>
-
     <header>
-        <h1>The Path of 42 Hadiths</h1>
-        <p class="subtitle">Собрание достоверных хадисов Имама ан-Навави</p>
+        <div class="arabic-line" lang="ar" dir="rtl">طَرِيقُ الْعِلْمِ</div>
+        <h1>ILMQALA</h1>
+        <div class="title-sub">крепость знания</div>
+        <div class="ornament"><span></span></div>
+        <p class="tagline">Платформа для изучения основ ислама</p>
     </header>
 
-    <div class="controls">
-        <input type="text" id="search" placeholder="Поиск по хадисам...">
-
-        <div class="mode-switch">
-            <button id="mode-read" class="active">Режим чтения</button>
-            <button id="mode-memorize">Режим заучивания</button>
+    <div class="container">
+        <div class="quick-stats">
+            <div class="stat-card">
+                <div class="stat-title">Время намазов · Махачкала</div>
+                <div id="prayers">Загрузка…</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">Сегодня</div>
+                <div class="date-gregorian" id="date-greg">—</div>
+                <div class="date-hijri" id="date-hijri"></div>
+            </div>
         </div>
 
-        <div class="progress-wrap">
-            <div class="progress-bar">
-                <div id="progress-fill"></div>
+        <div class="section-label">Разделы</div>
+        <div class="sections-grid">
+            <a href="exam.html" class="section-tile">
+                <div class="tile-mark"></div>
+                <div class="tile-title">42 хадиса</div>
+                <div class="tile-desc">Экзамен по сборнику имама ан-Навави</div>
+            </a>
+            <a href="names.html" class="section-tile">
+                <div class="tile-mark"></div>
+                <div class="tile-title">99 имён Аллаха</div>
+                <div class="tile-desc">Изучение прекрасных имён</div>
+            </a>
+            <div class="section-tile tile-soon">
+                <div class="tile-mark" style="background: var(--silver);"></div>
+                <div class="tile-title">Скоро</div>
+                <div class="tile-desc">Новый раздел</div>
             </div>
-            <span id="progress-text">Выучено: 0 из 42</span>
         </div>
     </div>
 
-    <div class="hadith-list" id="hadiths"></div>
+    <footer>Ильмкала — крепость знания</footer>
 
-    <footer>
-        <p>«42 хадиса» Имама ан-Навави</p>
-        <p>Заучивание с сохранением прогресса и экзаменом</p>
-    </footer>
+    <script>
+        const LATITUDE = 42.9825;    // Махачкала
+        const LONGITUDE = 47.5040;
 
-    <script src="script.js"></script>
+        const params = adhan.CalculationMethod.MuslimWorldLeague();
+        params.madhab = adhan.Madhab.Hanafi;
 
+        const now = new Date();
+        const times = new adhan.PrayerTimes(
+            new adhan.Coordinates(LATITUDE, LONGITUDE),
+            now,
+            params
+        );
+
+        const names = {
+            fajr: 'Фаджр',
+            sunrise: 'Восход',
+            dhuhr: 'Зухр',
+            asr: 'Аср',
+            maghrib: 'Магриб',
+            isha: 'Иша'
+        };
+
+        function fmt(date) {
+            const h = String(date.getHours()).padStart(2, '0');
+            const m = String(date.getMinutes()).padStart(2, '0');
+            return h + ':' + m;
+        }
+
+        const nextName = times.nextPrayer();
+
+        let html = '';
+        for (const key in names) {
+            const cls = (key === nextName) ? 'prayer-row next' : 'prayer-row';
+            html += '<div class="' + cls + '"><span>' + names[key] + '</span><span>' + fmt(times[key]) + '</span></div>';
+        }
+        document.getElementById('prayers').innerHTML = html;
+
+        document.getElementById('date-greg').textContent =
+            now.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+
+        try {
+            document.getElementById('date-hijri').textContent =
+                new Intl.DateTimeFormat('ru-u-ca-islamic-umalqura', {
+                    day: 'numeric', month: 'long', year: 'numeric'
+                }).format(now) + ' х.дж.';
+        } catch (e) {
+            document.getElementById('date-hijri').textContent = '';
+        }
+    </script>
 </body>
 </html>

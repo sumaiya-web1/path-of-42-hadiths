@@ -3,213 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ильмкала — крепость знания</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Спокойные, читаемые шрифты -->
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Montserrat:wght@500&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/adhan@4.4.2/dist/adhan.umd.min.js"></script>
-    <style>
-        :root {
-            --bg: #f5f6f9;
-            --card: #ffffff;
-            --text: #2c3e50;
-            --accent: #2b4470;
-            --gold: #b89a5e;
-            --line: #e0e0e0;
-        }
-        * { box-sizing: border-box; }
-        body {
-            margin: 0;
-            font-family: 'Merriweather', serif;
-            background-color: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-        }
-        header {
-            padding: 3rem 1rem;
-            text-align: center;
-        }
-        h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            color: var(--accent);
-            margin: 0 0 0.5rem;
-            letter-spacing: -1px;
-        }
-        .subtitle {
-            color: var(--gold);
-            font-size: 1.1rem;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 1rem 3rem;
-        }
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
-        @media (max-width: 600px) {
-            .stats-grid { grid-template-columns: 1fr; }
-        }
-        .stat-card {
-            background: var(--card);
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            border: 1px solid var(--line);
-        }
-        .stat-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text);
-            margin-bottom: 1rem;
-            border-bottom: 1px solid var(--line);
-            padding-bottom: 0.5rem;
-        }
-        .prayer-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.4rem 0;
-            border-bottom: 1px dashed var(--line);
-        }
-        .prayer-row:last-child { border-bottom: none; }
-        .date-block {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 500;
-            font-size: 1.2rem;
-            margin-top: 0.2rem;
-        }
-        .sections-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.5rem;
-        }
-        .section-tile {
-            display: block;
-            background: var(--card);
-            padding: 1.8rem 1.5rem;
-            text-decoration: none;
-            color: var(--text);
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            border: 1px solid transparent;
-        }
-        .section-tile:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-            border-color: var(--accent);
-        }
-        .tile-title {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            font-size: 1.15rem;
-            margin: 0 0 0.6rem;
-            color: var(--accent);
-        }
-        .tile-desc {
-            font-size: 0.95rem;
-            color: #555;
-        }
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: #888;
-            font-size: 0.9rem;
-            border-top: 1px solid var(--line);
-        }
-    </style>
+    <title>The Path of 42 Hadiths</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
+    <div class="arabic-banner">بسم الله الرحمن الرحيم</div>
+
     <header>
-        <h1>ILMQALA</h1>
-        <div class="subtitle">крепость знания</div>
+        <h1>The Path of 42 Hadiths</h1>
+        <p class="subtitle">Собрание достоверных хадисов Имама ан-Навави</p>
     </header>
 
-    <div class="container">
-        
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-title">Время намазов · Махачкала</div>
-                <div id="prayers">Загрузка...</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">Сегодня</div>
-                <div class="date-block" id="date-greg">—</div>
-                <div style="font-size: 0.9rem; color: #888;" id="date-hijri">—</div>
-            </div>
+    <div class="controls">
+        <input type="text" id="search" placeholder="Поиск по хадисам...">
+
+        <div class="mode-switch">
+            <button id="mode-read" class="active">Режим чтения</button>
+            <button id="mode-memorize">Режим заучивания</button>
         </div>
 
-        <div class="sections-grid">
-            <!-- Плитка ведёт прямо на экзамен, как ты хотела -->
-            <a href="exam.html" class="section-tile">
-                <h3 class="tile-title">42 хадиса</h3>
-                <p class="tile-desc">Экзамен по сборнику имама ан-Навави</p>
-            </a>
-            <a href="names.html" class="section-tile">
-                <h3 class="tile-title">99 имён Аллаха</h3>
-                <p class="tile-desc">Раздел с именами и значениями</p>
-            </a>
+        <div class="progress-wrap">
+            <div class="progress-bar">
+                <div id="progress-fill"></div>
+            </div>
+            <span id="progress-text">Выучено: 0 из 42</span>
         </div>
     </div>
 
+    <div class="hadith-list" id="hadiths"></div>
+
     <footer>
-        Ильмкала — крепость знания
+        <p>«42 хадиса» Имама ан-Навави</p>
+        <p>Заучивание с сохранением прогресса и экзаменом</p>
     </footer>
 
-    <script>
-        const LATITUDE = 42.9825;
-        const LONGITUDE = 47.5040;
+    <script src="script.js"></script>
 
-        const params = adhan.CalculationMethod.MuslimWorldLeague();
-        params.madhab = adhan.Madhab.Hanafi;
-
-        const now = new Date();
-        const times = new adhan.PrayerTimes(
-            new adhan.Coordinates(LATITUDE, LONGITUDE),
-            now,
-            params
-        );
-
-        const names = {
-            fajr: 'Фаджр',
-            sunrise: 'Восход',
-            dhuhr: 'Зухр',
-            asr: 'Аср',
-            maghrib: 'Магриб',
-            isha: 'Иша'
-        };
-
-        function fmt(date) {
-            const h = String(date.getHours()).padStart(2, '0');
-            const m = String(date.getMinutes()).padStart(2, '0');
-            return h + ':' + m;
-        }
-
-        let html = '';
-        for (const key in names) {
-            html += `<div class="prayer-row"><span>${names[key]}</span><span>${fmt(times[key])}</span></div>`;
-        }
-        document.getElementById('prayers').innerHTML = html;
-
-        document.getElementById('date-greg').textContent =
-            now.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
-
-        try {
-            document.getElementById('date-hijri').textContent =
-                new Intl.DateTimeFormat('ru-u-ca-islamic-umalqura', {
-                    day: 'numeric', month: 'long', year: 'numeric'
-                }).format(now) + ' х.дж.';
-        } catch (e) {
-            document.getElementById('date-hijri').textContent = '';
-        }
-    </script>
 </body>
 </html>

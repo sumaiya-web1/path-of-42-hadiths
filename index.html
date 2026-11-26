@@ -50,5 +50,166 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        @media (max-width: 600px) {
+            .stats-grid { grid-template-columns: 1fr; }
+        }
+        .stat-card {
+            background: var(--card);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid var(--line);
+        }
+        .stat-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 0.5rem;
+        }
+        .prayer-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.4rem 0;
+            border-bottom: 1px dashed var(--line);
+        }
+        .prayer-row:last-child { border-bottom: none; }
+        .date-block {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 1.2rem;
+            margin-top: 0.2rem;
+        }
+        .sections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+        .section-tile {
+            display: block;
+            background: var(--card);
+            padding: 1.8rem 1.5rem;
+            text-decoration: none;
+            color: var(--text);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid transparent;
+        }
+        .section-tile:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            border-color: var(--accent);
+        }
+        .tile-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1.15rem;
+            margin: 0 0 0.6rem;
+            color: var(--accent);
+        }
+        .tile-desc {
+            font-size: 0.95rem;
+            color: #555;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #888;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--line);
+        }
+    </style>
+</head>
+<body>
 
+    <header>
+        <h1>ILMQALA</h1>
+        <div class="subtitle">крепость знания</div>
+    </header>
+
+    <div class="container">
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-title">Время намазов · Махачкала</div>
+                <div id="prayers">Загрузка...</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">Сегодня</div>
+                <div class="date-block" id="date-greg">—</div>
+                <div style="font-size: 0.9rem; color: #888;" id="date-hijri">—</div>
+            </div>
+        </div>
+
+        <div class="sections-grid">
+            <!-- Плитка ведёт прямо на экзамен, как ты хотела -->
+            <a href="exam.html" class="section-tile">
+                <h3 class="tile-title">42 хадиса</h3>
+                <p class="tile-desc">Экзамен по сборнику имама ан-Навави</p>
+            </a>
+            <a href="names.html" class="section-tile">
+                <h3 class="tile-title">99 имён Аллаха</h3>
+                <p class="tile-desc">Раздел с именами и значениями</p>
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        Ильмкала — крепость знания
+    </footer>
+
+    <script>
+        const LATITUDE = 42.9825;
+        const LONGITUDE = 47.5040;
+
+        const params = adhan.CalculationMethod.MuslimWorldLeague();
+        params.madhab = adhan.Madhab.Hanafi;
+
+        const now = new Date();
+        const times = new adhan.PrayerTimes(
+            new adhan.Coordinates(LATITUDE, LONGITUDE),
+            now,
+            params
+        );
+
+        const names = {
+            fajr: 'Фаджр',
+            sunrise: 'Восход',
+            dhuhr: 'Зухр',
+            asr: 'Аср',
+            maghrib: 'Магриб',
+            isha: 'Иша'
+        };
+
+        function fmt(date) {
+            const h = String(date.getHours()).padStart(2, '0');
+            const m = String(date.getMinutes()).padStart(2, '0');
+            return h + ':' + m;
+        }
+
+        let html = '';
+        for (const key in names) {
+            html += `<div class="prayer-row"><span>${names[key]}</span><span>${fmt(times[key])}</span></div>`;
+        }
+        document.getElementById('prayers').innerHTML = html;
+
+        document.getElementById('date-greg').textContent =
+            now.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+
+        try {
+            document.getElementById('date-hijri').textContent =
+                new Intl.DateTimeFormat('ru-u-ca-islamic-umalqura', {
+                    day: 'numeric', month: 'long', year: 'numeric'
+                }).format(now) + ' х.дж.';
+        } catch (e) {
+            document.getElementById('date-hijri').textContent = '';
+        }
+    </script>
+</body>
 </html>

@@ -1,0 +1,333 @@
+:root {
+    --deep-blue: #0A1F44;
+    --blue-mid: #14336B;
+    --blue-light: #1E4C96;
+    --gold: #C9A961;
+    --white: #FFFFFF;
+    --grey-bg: #F6F8FC;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: "Georgia", "Times New Roman", serif;
+    background-color: var(--white);
+    color: var(--deep-blue);
+    line-height: 1.7;
+}
+
+/* Арабская строка сверху */
+.arabic-banner {
+    background: linear-gradient(135deg, var(--deep-blue), var(--blue-mid));
+    color: var(--gold);
+    text-align: center;
+    font-size: 1.4rem;
+    padding: 14px;
+    letter-spacing: 1px;
+    font-family: "Scheherazade New", "Traditional Arabic", serif;
+}
+
+header {
+    text-align: center;
+    padding: 40px 20px 30px;
+    background-color: var(--white);
+    border-bottom: 3px solid var(--gold);
+}
+
+header h1 {
+    font-size: 2.2rem;
+    color: var(--deep-blue);
+    letter-spacing: 0.5px;
+}
+
+.subtitle {
+    color: var(--blue-light);
+    font-style: italic;
+    margin-top: 6px;
+}
+
+/* Панель управления */
+.controls {
+    max-width: 760px;
+    margin: 25px auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+#search {
+    padding: 12px 16px;
+    border: 2px solid var(--blue-light);
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+}
+
+#search:focus { border-color: var(--deep-blue); }
+
+.mode-switch { display: flex; gap: 10px; }
+
+.mode-switch button {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid var(--deep-blue);
+    background: var(--white);
+    color: var(--deep-blue);
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: 0.2s;
+}
+
+.mode-switch button.active {
+    background: var(--deep-blue);
+    color: var(--white);
+}
+
+.progress-wrap { text-align: center; font-size: 0.9rem; }
+
+.progress-bar {
+    height: 8px;
+    background: var(--grey-bg);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 5px;
+    border: 1px solid var(--blue-light);
+}
+
+#progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--gold);
+    transition: 0.4s;
+}
+
+/* Карточки хадисов */
+.hadith-list {
+    max-width: 760px;
+    margin: 0 auto 60px;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.hadith-card {
+    background: var(--grey-bg);
+    border: 1px solid #E1E7F2;
+    border-left: 5px solid var(--deep-blue);
+    border-radius: 12px;
+    padding: 20px 24px;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+}
+
+.hadith-card:hover { box-shadow: 0 4px 14px rgba(10, 31, 68, 0.15); }
+
+.hadith-card.done {
+    border-left-color: var(--gold);
+    opacity: 0.85;
+}
+
+.hadith-number {
+    display: inline-block;
+    background: var(--deep-blue);
+    color: var(--white);
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.hadith-preview {
+    display: inline;
+    color: var(--deep-blue);
+    font-weight: bold;
+}
+
+.hadith-full { display: none; margin-top: 14px; }
+
+.hadith-card.open .hadith-full { display: block; }
+
+.hadith-text {
+    margin-bottom: 10px;
+    direction: ltr;
+    text-align: left;
+}
+
+.hadith-source {
+    color: var(--blue-light);
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* Арабский оригинал */
+.hadith-arabic {
+    direction: rtl;
+    text-align: right;
+    font-family: "Scheherazade New", "Amiri", "Traditional Arabic", serif;
+    font-size: 1.45rem;
+    line-height: 2.2;
+    color: var(--blue-mid);
+    border-bottom: 1px dashed var(--gold);
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+}
+
+/* Режим заучивания: текст скрыт, виден номер и источник */
+.memorize-mode .hadith-text { display: none; }
+.memorize-mode .hadith-preview { display: none; }
+.memorize-mode .hadith-card.open .hadith-text { display: block; }
+.memorize-mode .hadith-card.open .hadith-preview { display: none; }
+
+/* Кнопка "выучено" */
+.memorize-btn {
+    margin-top: 12px;
+    padding: 8px 16px;
+    background: var(--gold);
+    color: var(--deep-blue);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
+}
+
+.memorize-btn.done { background: var(--blue-light); color: var(--white); }
+
+/* Декоративный орнамент внизу карточки */
+.hadith-card::after {
+    content: "۞";
+    display: block;
+    text-align: center;
+    color: var(--gold);
+    margin-top: 10px;
+    font-size: 1.2rem;
+}
+
+/* --- Экран завершения (Финал) --- */
+#completion-screen {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 31, 68, 0.95);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    color: white;
+    backdrop-filter: blur(4px);
+}
+
+.completion-content {
+    max-width: 500px;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(201, 169, 97, 0.3);
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(201, 169, 97, 0.4);
+    animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.completion-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    color: #C9A961;
+    text-shadow: 0 0 10px rgba(201, 169, 97, 0.8);
+}
+
+.completion-title {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+}
+
+.completion-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    color: #f0f0f0;
+}
+
+.dua-box {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid #C9A961;
+    margin-bottom: 30px;
+    text-align: right;
+    direction: rtl;
+}
+
+.arabic-dua {
+    font-family: "Scheherazade New", serif;
+    font-size: 1.3rem;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.russian-dua {
+    font-size: 0.95rem;
+    color: #ccc;
+}
+
+.restart-btn {
+    padding: 12px 30px;
+    background: #C9A961;
+    color: #0A1F44;
+    border: none;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.restart-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(201, 169, 97, 0.6);
+}
+
+/* --- Эффект конфетти --- */
+.confetti {
+    position: absolute;
+    top: -10px;
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(120vh) rotate(360deg); opacity: 0; }
+}
+
+footer {
+    background: linear-gradient(135deg, var(--deep-blue), var(--blue-mid));
+    color: var(--white);
+    text-align: center;
+    padding: 24px;
+    border-top: 3px solid var(--gold);
+}
+
+footer p { font-size: 0.9rem; margin: 3px 0; }
+
+@media (max-width: 500px) {
+    header h1 { font-size: 1.6rem; }
+    .hadith-card { padding: 16px; }
+}

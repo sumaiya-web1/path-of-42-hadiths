@@ -4,353 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ильмкала — крепость знания</title>
-    <meta name="description" content="Ильмкала — платформа для изучения основ ислама: 42 хадиса имама ан-Навави, 99 имён Аллаха, время намазов.">
-    <link rel="icon" type="image/png" href="favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Prata&family=Alegreya:wght@400;500;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Спокойные, читаемые шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Montserrat:wght@500&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/adhan@4.4.2/dist/adhan.umd.min.js"></script>
     <style>
         :root {
-            --bg: #efeae1;
-            --card: #fbf9f4;
-            --text: #22304a;
-            --text-soft: #6d7482;
-            --blue: #2b4470;
-            --mountain: #54677f;
-            --silver: #8b9099;
+            --bg: #f5f6f9;
+            --card: #ffffff;
+            --text: #2c3e50;
+            --accent: #2b4470;
             --gold: #b89a5e;
-            --line: #ddd6c8;
+            --line: #e0e0e0;
         }
         * { box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
         body {
             margin: 0;
-            font-family: 'Alegreya', Georgia, serif;
+            font-family: 'Merriweather', serif;
             background-color: var(--bg);
             color: var(--text);
-        }
-
-        /* ============ ШАПКА: НЕБО И ГОРЫ ============ */
-        .hero {
-            position: relative;
-            min-height: 88vh;
-            background: linear-gradient(180deg, #c7d9e8 0%, #d9e4ec 45%, #f0e7d4 100%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            overflow: hidden;
-        }
-        .hero-top {
-            position: relative;
-            z-index: 3;
-            text-align: center;
-            padding: 4.5rem 1rem 2rem;
-        }
-        .arabic-line {
-            font-family: 'Amiri', serif;
-            font-size: 1.5rem;
-            color: var(--gold);
-            margin-bottom: 0.8rem;
-        }
-        h1 {
-            margin: 0;
-            font-family: 'Prata', serif;
-            font-weight: 400;
-            font-size: clamp(2.6rem, 8vw, 4.2rem);
-            letter-spacing: 0.3em;
-            text-indent: 0.3em;
-            color: var(--blue);
-        }
-        .title-sub {
-            color: var(--text-soft);
-            font-size: 1.15rem;
-            letter-spacing: 0.18em;
-            margin-top: 0.8rem;
-        }
-        .hero-tagline {
-            position: relative;
-            z-index: 3;
-            text-align: center;
-            color: var(--text);
-            max-width: 480px;
-            margin: 0 auto;
-            padding: 0 1rem 3rem;
-            font-size: 1.15rem;
             line-height: 1.6;
         }
-        .mountains {
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            width: 100%;
-            height: 46vh;
-            min-height: 280px;
-            z-index: 1;
-            pointer-events: none;
-        }
-        /* Кубачинский кант под шапкой */
-        .kubachi-strip {
-            height: 26px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='26' viewBox='0 0 48 26'%3E%3Cg fill='none' stroke='%238b9099' stroke-width='1.1'%3E%3Cpath d='M12 4.5L20.5 13L12 21.5L3.5 13Z'/%3E%3Cpath d='M36 4.5L44.5 13L36 21.5L27.5 13Z'/%3E%3Cpath d='M20.5 13H27.5'/%3E%3Cpath d='M44.5 13H48'/%3E%3Cpath d='M0 13H3.5'/%3E%3C/g%3E%3Cpath d='M12 9.5L15.5 13L12 16.5L8.5 13Z' fill='%23b89a5e'/%3E%3Cpath d='M36 9.5L39.5 13L36 16.5L32.5 13Z' fill='%23b89a5e'/%3E%3C/svg%3E");
-            background-repeat: repeat-x;
-            background-position: center;
-        }
-
-        /* ============ ОСНОВНАЯ ЧАСТЬ: КАМЕНЬ ============ */
-        .container {
-            max-width: 1060px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 4rem 1.5rem 5rem;
-        }
-
-        .quick-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-bottom: 4.5rem;
-        }
-        .stat-card {
-            background: var(--card);
-            border: 1px solid var(--line);
-            border-top: 3px solid var(--blue);
-            border-radius: 3px;
-            padding: 2.2rem 2rem;
+        header {
+            padding: 3rem 1rem;
             text-align: center;
-            box-shadow: 0 6px 24px rgba(34, 48, 74, 0.06);
         }
-        .stat-title {
-            font-family: 'Prata', serif;
-            font-size: 1rem;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            color: var(--text-soft);
-            margin-bottom: 1.4rem;
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--accent);
+            margin: 0 0 0.5rem;
+            letter-spacing: -1px;
         }
-        .prayer-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.35rem 0.7rem;
-            font-size: 1.1rem;
-        }
-        .prayer-row.next {
-            background: rgba(43, 68, 112, 0.08);
-            border-radius: 3px;
-        }
-        .prayer-row.next span:last-child { color: var(--gold); font-weight: 700; }
-
-        .date-gregorian {
-            font-family: 'Prata', serif;
-            font-size: 1.5rem;
-        }
-        .date-hijri {
-            margin-top: 0.7rem;
+        .subtitle {
             color: var(--gold);
             font-size: 1.1rem;
         }
-        .date-note {
-            margin-top: 0.3rem;
-            color: var(--text-soft);
-            font-size: 0.88rem;
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1rem 3rem;
         }
-
-        .section-label {
-            text-align: center;
-            font-family: 'Prata', serif;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            font-size: 1rem;
-            color: var(--text-soft);
-            margin-bottom: 2.4rem;
-        }
-        .sections-grid {
+        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 2rem;
-        }
-        .section-tile {
-            background: var(--card);
-            border: 1px solid var(--line);
-            border-radius: 3px;
-            padding: 3rem 1.8rem;
-            text-decoration: none;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
-            box-shadow: 0 6px 24px rgba(34, 48, 74, 0.05);
-        }
-        .section-tile:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 16px 36px rgba(34, 48, 74, 0.13);
-        }
-        .tile-ornament {
-            height: 26px;
-            width: 96px;
-            margin-bottom: 1.2rem;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='26' viewBox='0 0 48 26'%3E%3Cg fill='none' stroke='%238b9099' stroke-width='1.1'%3E%3Cpath d='M12 4.5L20.5 13L12 21.5L3.5 13Z'/%3E%3Cpath d='M36 4.5L44.5 13L36 21.5L27.5 13Z'/%3E%3Cpath d='M20.5 13H27.5'/%3E%3Cpath d='M44.5 13H48'/%3E%3Cpath d='M0 13H3.5'/%3E%3C/g%3E%3Cpath d='M12 9.5L15.5 13L12 16.5L8.5 13Z' fill='%23b89a5e'/%3E%3Cpath d='M36 9.5L39.5 13L36 16.5L32.5 13Z' fill='%23b89a5e'/%3E%3C/svg%3E");
-            background-repeat: repeat-x;
-            background-position: center;
-        }
-        .tile-title {
-            font-family: 'Prata', serif;
-            font-size: 1.45rem;
-            color: var(--blue);
-        }
-        .tile-desc {
-            margin-top: 0.6rem;
-            font-size: 1.02rem;
-            color: var(--text-soft);
-            line-height: 1.45;
-        }
-        .tile-soon { opacity: 0.45; }
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
 
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-soft);
-            font-size: 0.9rem;
-            border-top: 1px solid var(--line);
-        }
-
-        @media (max-width: 640px) {
-            .quick-stats { grid-template-columns: 1fr; gap: 1.4rem; }
-            .hero { min-height: 72vh; }
-            .container { padding: 2.5rem 1rem 3.5rem; }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- ШАПКА: небо и горы Дагестана -->
-    <div class="hero">
-        <div class="hero-top">
-            <div class="arabic-line" lang="ar" dir="rtl">طَرِيقُ الْعِلْمِ</div>
-            <h1>ILMQALA</h1>
-            <div class="title-sub">крепость знания</div>
-        </div>
-        <p class="hero-tagline">Платформа для изучения основ ислама.<br>Место, где знание становится стеной крепости — камень за камнем.</p>
-        <!-- Горы: три хребта, дальние светлее — воздушная перспектива -->
-        <svg class="mountains" viewBox="0 0 1440 320" preserveAspectRatio="none" aria-hidden="true">
-            <defs>
-                <linearGradient id="fadeNear" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0.55" stop-color="#54677f"/>
-                    <stop offset="1" stop-color="#efeae1"/>
-                </linearGradient>
-                <linearGradient id="fadeMid" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0.4" stop-color="#9aa9bd"/>
-                    <stop offset="1" stop-color="#dfe0d9"/>
-                </linearGradient>
-            </defs>
-            <!-- дальний хребет -->
-            <path fill="#bccbd9" opacity="0.75" d="M0 200 L90 140 L170 185 L290 105 L380 175 L470 115 L580 190 L700 120 L810 185 L930 110 L1040 180 L1160 125 L1280 190 L1370 145 L1440 180 L1440 320 L0 320 Z"/>
-            <!-- средний хребет -->
-            <path fill="url(#fadeMid)" d="M0 240 L110 165 L220 220 L340 130 L450 210 L570 150 L690 225 L820 140 L940 215 L1070 135 L1190 215 L1310 160 L1440 220 L1440 320 L0 320 Z"/>
-            <!-- ближний хребет, растворяется в каменном фоне -->
-            <path fill="url(#fadeNear)" d="M0 320 L0 265 L140 200 L260 255 L400 175 L540 250 L680 190 L830 260 L980 185 L1130 255 L1280 205 L1440 260 L1440 320 Z"/>
-            <!-- птицы -->
-            <g stroke="#5a6c85" stroke-width="1.4" fill="none" opacity="0.7">
-                <path d="M330 92 q7 -7 14 0 M344 92 q7 -7 14 0"/>
-                <path d="M470 70 q5 -5 10 0 M480 70 q5 -5 10 0"/>
-                <path d="M1130 84 q6 -6 12 0 M1142 84 q6 -6 12 0"/>
-            </g>
-        </svg>
-    </div>
-
-    <!-- Кубачинский кант -->
-    <div class="kubachi-strip"></div>
-
-    <!-- Основная часть: светлый камень -->
-    <div class="container">
-
-        <div class="quick-stats">
-            <div class="stat-card">
-                <div class="stat-title">Время намазов · Махачкала</div>
-                <div id="prayers">Загрузка…</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">Сегодня</div>
-                <div class="date-gregorian" id="date-greg">—</div>
-                <div class="date-hijri" id="date-hijri"></div>
-                <div class="date-note">дата по Хиджре может расходиться на один день с местным наблюдением луны</div>
-            </div>
-        </div>
-
-        <div class="section-label">Разделы</div>
-        <div class="sections-grid">
-            <a href="exam.html" class="section-tile">
-                <div class="tile-ornament"></div>
-                <div class="tile-title">42 хадиса</div>
-                <div class="tile-desc">Экзамен по сборнику имама ан-Навави</div>
-            </a>
-            <a href="names.html" class="section-tile">
-                <div class="tile-ornament"></div>
-                <div class="tile-title">99 имён Аллаха</div>
-                <div class="tile-desc">Изучение прекрасных имён</div>
-            </a>
-            <div class="section-tile tile-soon">
-                <div class="tile-ornament"></div>
-                <div class="tile-title">Скоро</div>
-                <div class="tile-desc">Новый раздел</div>
-            </div>
-        </div>
-
-    </div>
-
-    <footer>Ильмкала — крепость знания</footer>
-
-    <script>
-        const LATITUDE = 42.9825;    // Махачкала
-        const LONGITUDE = 47.5040;
-
-        const params = adhan.CalculationMethod.MuslimWorldLeague();
-        params.madhab = adhan.Madhab.Hanafi;
-
-        const now = new Date();
-        const times = new adhan.PrayerTimes(
-            new adhan.Coordinates(LATITUDE, LONGITUDE),
-            now,
-            params
-        );
-
-        const names = {
-            fajr: 'Фаджр',
-            sunrise: 'Восход',
-            dhuhr: 'Зухр',
-            asr: 'Аср',
-            maghrib: 'Магриб',
-            isha: 'Иша'
-        };
-
-        function fmt(date) {
-            const h = String(date.getHours()).padStart(2, '0');
-            const m = String(date.getMinutes()).padStart(2, '0');
-            return h + ':' + m;
-        }
-
-        const nextName = times.nextPrayer();
-
-        let html = '';
-        for (const key in names) {
-            const cls = (key === nextName) ? 'prayer-row next' : 'prayer-row';
-            html += '<div class="' + cls + '"><span>' + names[key] + '</span><span>' + fmt(times[key]) + '</span></div>';
-        }
-        document.getElementById('prayers').innerHTML = html;
-
-        document.getElementById('date-greg').textContent =
-            now.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
-
-        try {
-            document.getElementById('date-hijri').textContent =
-                new Intl.DateTimeFormat('ru-u-ca-islamic-umalqura', {
-                    day: 'numeric', month: 'long', year: 'numeric'
-                }).format(now) + ' х.дж.';
-        } catch (e) {
-            document.getElementById('date-hijri').textContent = '';
-        }
-    </script>
-</body>
 </html>
